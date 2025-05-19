@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GPT 기반 사용자 말투 학습 이메일 자동 생성 시스템
 
-## Getting Started
+이 시스템은 사용자의 이메일 작성 스타일(말투)을 학습하여, 간단한 정보 입력만으로 해당 스타일을 반영한 이메일 초안을 자동으로 생성하는 도구입니다.
 
-First, run the development server:
+## 주요 기능
 
+- **사용자 말투 학습**: 기존 이메일 또는 텍스트를 입력하여 시스템이 사용자의 작성 스타일을 분석
+- **이메일 유형 선택**: '첫 메일' 또는 '회신 메일' 중 선택 가능
+- **간단 입력 기반 자동 생성**: 목적/키워드와 이메일 유형을 바탕으로 사용자 스타일이 반영된 이메일 초안 생성
+
+## 기술 스택
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- OpenAI API (GPT-4)
+- React Hook Form
+
+## 시작하기
+
+### 환경 설정
+
+1. 프로젝트 클론:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd email-generator
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. 패키지 설치:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. OpenAI API 키 설정:
+`.env.local` 파일을 생성하고 다음 내용을 추가합니다:
+```
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4.1
+```
+(주의: 실제 API 키를 입력해야 합니다)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. 개발 서버 실행:
+```bash
+npm run dev
+```
 
-## Learn More
+## 사용 방법
 
-To learn more about Next.js, take a look at the following resources:
+1. **말투 학습**:
+   - '말투 학습' 탭에서 이전에 작성한 이메일이나 텍스트를 입력
+   - '말투 분석 및 다음 단계' 버튼 클릭
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **이메일 생성**:
+   - '이메일 생성' 탭에서 이메일 유형 ('첫 메일' 또는 '회신 메일') 선택
+   - 이메일 목적이나 키워드 입력
+   - '회신 메일' 선택 시 이전 이메일 내용 입력
+   - '이메일 생성하기' 버튼 클릭
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **결과 활용**:
+   - 생성된 이메일을 복사하거나 수정하여 사용
 
-## Deploy on Vercel
+## 개발자 참고사항
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- OpenAI API 호출은 서버 사이드 API 라우트(`app/api/generate-email/route.ts`)에서 처리됩니다.
+- 기본 모델은 `gpt-4.1`을 사용하며, 환경 변수에서 설정을 변경할 수 있습니다.
+- 클라이언트는 서버 API 라우트를 호출하여 응답을 받습니다.
+- 실제 서비스 배포 시, 환경 변수(OPENAI_API_KEY)를 적절하게 설정해야 합니다.
+- 필요에 따라 API 호출 프롬프트를 변경하여 이메일 생성 결과를 개선할 수 있습니다.
