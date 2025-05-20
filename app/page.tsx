@@ -219,7 +219,7 @@ export default function Home() {
                     
                     <div className="form-group">
                       <label htmlFor="purpose" className="form-label">
-                        이메일 목적 / 키워드
+                        이메일 목적 / 포함 내용 등
                       </label>
                       <input
                         id="purpose"
